@@ -150,16 +150,30 @@
             margin-bottom: 12px;
         }
 
+        .card-title-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
         .card-title {
             font-size: 1.25rem;
             font-weight: 700;
             color: var(--primary);
         }
 
+        .chevron-icon {
+            display: none;
+            width: 20px;
+            height: 20px;
+            fill: var(--primary);
+            transition: transform 0.3s ease;
+        }
+
         .card-purpose {
             font-size: 0.9rem;
             color: var(--text-muted);
-            margin-bottom: 16px;
+            margin-top: 6px;
         }
 
         .info-group {
@@ -219,6 +233,51 @@
             text-decoration: underline;
         }
 
+        /* Mobile Collapsible Styles */
+        @media (max-width: 768px) {
+            body {
+                padding: 12px;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .card {
+                padding: 16px;
+            }
+
+            .card-header {
+                cursor: pointer;
+                user-select: none;
+                margin-bottom: 0;
+            }
+
+            .chevron-icon {
+                display: inline-block;
+            }
+
+            .card-details {
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s cubic-bezier(0, 1, 0, 1);
+            }
+
+            .card.open .card-details {
+                max-height: 2000px;
+                transition: max-height 0.5s ease-in-out;
+            }
+
+            .card.open .chevron-icon {
+                transform: rotate(180deg);
+            }
+
+            .card.open .card-header {
+                margin-bottom: 12px;
+            }
+        }
+
         footer {
             margin-top: 40px;
             text-align: center;
@@ -245,8 +304,8 @@
         <strong>About This Directory:</strong>
         <p>This page details every app required for Year 7 at Rugby School Dubai. Each tool is broken down into <strong>Student Access</strong>, <strong>Parent Access</strong>, <strong>Main Point of Contact</strong>, and <strong>Other Info</strong>.</p>
         <ul>
-            <li>📘 Official Reference: View the full <a href="https://heyzine.com/flip-book/rugbyschooldubai" target="_blank">Rugby School Dubai Parent Handbook</a>.</li>
-            <li>Use the search bar below to filter apps by name, feature (e.g., <em>homework, canteen, photos, absence, fees</em>), or contact.</li>
+            <li>📘 Official Reference: View the full <a href="https://heyzine.com/flip-book/rugbyschooldubai#page/18" target="_blank">Rugby School Dubai Parent Handbook</a>.</li>
+            <li>Use the search bar below to filter apps by name, feature (e.g., <em>homework, canteen, photos, absence, fees</em>), or contact. Tap card titles on mobile to collapse or expand.</li>
         </ul>
     </div>
 
@@ -260,380 +319,373 @@
 
         <!-- iSAMS / iParent -->
         <div class="card" data-tags="isams iparent communication reports schedule timetable week a week b year 7 senior school portal">
-            <div>
-                <div class="card-header">
+            <div class="card-header" onclick="toggleCard(this)">
+                <div class="card-title-row">
                     <div class="card-title">iSAMS / iParent</div>
+                    <svg class="chevron-icon" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
                 </div>
-                <div class="card-purpose">
-                    Main school communication platform for viewing timetables, academic reports, attendance, rewards, school calendar, and contact updates.
-                </div>
+                <div class="card-purpose">Main school communication platform for viewing timetables, academic reports, attendance, rewards, school calendar, and contact updates.</div>
             </div>
-            <div class="info-group">
-                <div class="info-row">
-                    <span class="info-label">🎓 Student Access</span>
-                    <div class="info-value link-list">
-                        🌐 Web Portal: <a href="https://rugbyschool.students.isams.cloud" target="_blank">rugbyschool.students.isams.cloud</a><br>
-                        📱 Mobile App: <strong>iStudent App</strong> (<a href="https://apps.apple.com/app/istudent-app/id1210657371" target="_blank">iOS</a> / <a href="https://play.google.com/store/apps/details?id=com.isams.istudent" target="_blank">Android</a>)
+            <div class="card-details">
+                <div class="info-group">
+                    <div class="info-row">
+                        <span class="info-label">🎓 Student Access</span>
+                        <div class="info-value link-list">
+                            🌐 Web Portal: <a href="https://rugbyschool.students.isams.cloud" target="_blank">rugbyschool.students.isams.cloud</a><br>
+                            📱 Mobile App: <strong>iStudent App</strong> (<a href="https://apps.apple.com/app/istudent-app/id1210657371" target="_blank">iOS</a> / <a href="https://play.google.com/store/apps/details?id=com.isams.istudent" target="_blank">Android</a>)
+                        </div>
                     </div>
-                </div>
-                <hr class="section-divider">
-                <div class="info-row">
-                    <span class="info-label">👨‍👩‍👧 Parent Access</span>
-                    <div class="info-value link-list">
-                        🌐 Web Portal: <a href="https://rugbyschool.parents.isams.cloud" target="_blank">rugbyschool.parents.isams.cloud</a><br>
-                        📱 Mobile App: <strong>iParent App</strong> (<a href="https://apps.apple.com/app/iparent-app/id1210657403" target="_blank">iOS</a> / <a href="https://play.google.com/store/apps/details?id=com.isams.iparent" target="_blank">Android</a>)
+                    <hr class="section-divider">
+                    <div class="info-row">
+                        <span class="info-label">👨‍👩‍👧 Parent Access</span>
+                        <div class="info-value link-list">
+                            🌐 Web Portal: <a href="https://rugbyschool.parents.isams.cloud" target="_blank">rugbyschool.parents.isams.cloud</a><br>
+                            📱 Mobile App: <strong>iParent App</strong> (<a href="https://apps.apple.com/app/iparent-app/id1210657403" target="_blank">iOS</a> / <a href="https://play.google.com/store/apps/details?id=com.isams.iparent" target="_blank">Android</a>)
+                        </div>
                     </div>
-                </div>
-                <hr class="section-divider">
-                <div class="info-row">
-                    <span class="info-label">📞 Main Point of Contact</span>
-                    <span class="info-value">
-                        Parent Relations Manager: <a href="mailto:prm@rugbyschooldubai.ae">prm@rugbyschooldubai.ae</a><br>
-                        Admissions Team: <a href="mailto:admissions@rugbyschooldubai.ae">admissions@rugbyschooldubai.ae</a>
-                    </span>
-                </div>
-                <hr class="section-divider">
-                <div class="info-row">
-                    <span class="info-label">ℹ️ Other Info</span>
-                    <span class="info-value">
-                        School App Code: <span class="code-block">RSD1</span>. Registration credentials are emailed by Admissions. Year 7 operates on an alternating <strong>Week A / Week B</strong> schedule. To print a clean PDF timetable, log into the parent web portal and go to <em>Academic Information ➔ School Timetable</em>.
-                    </span>
+                    <hr class="section-divider">
+                    <div class="info-row">
+                        <span class="info-label">📞 Main Point of Contact</span>
+                        <span class="info-value">
+                            Parent Relations Manager: <a href="mailto:prm@rugbyschooldubai.ae">prm@rugbyschooldubai.ae</a><br>
+                            Admissions Team: <a href="mailto:admissions@rugbyschooldubai.ae">admissions@rugbyschooldubai.ae</a>
+                        </span>
+                    </div>
+                    <hr class="section-divider">
+                    <div class="info-row">
+                        <span class="info-label">ℹ️ Other Info</span>
+                        <span class="info-value">
+                            School App Code: <span class="code-block">RSD1</span>. Registration credentials are emailed by Admissions. Year 7 operates on an alternating <strong>Week A / Week B</strong> schedule. To print a clean PDF timetable, log into the parent web portal and go to <em>Academic Information ➔ School Timetable</em>.
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Sparx Maths -->
         <div class="card" data-tags="sparx maths mathematics homework learning year 7">
-            <div>
-                <div class="card-header">
+            <div class="card-header" onclick="toggleCard(this)">
+                <div class="card-title-row">
                     <div class="card-title">Sparx Maths</div>
+                    <svg class="chevron-icon" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
                 </div>
-                <div class="card-purpose">
-                    Online personalized mathematics learning and homework platform used across Year 7, tailored to individual student progress.
-                </div>
+                <div class="card-purpose">Online personalized mathematics learning and homework platform used across Year 7, tailored to individual student progress.</div>
             </div>
-            <div class="info-group">
-                <div class="info-row">
-                    <span class="info-label">🎓 Student Access</span>
-                    <div class="info-value link-list">
-                        🌐 Web Login: <a href="https://auth.sparxmaths.uk/student" target="_blank">auth.sparxmaths.uk/student</a>
+            <div class="card-details">
+                <div class="info-group">
+                    <div class="info-row">
+                        <span class="info-label">🎓 Student Access</span>
+                        <div class="info-value link-list">
+                            🌐 Web Login: <a href="https://auth.sparxmaths.uk/student" target="_blank">auth.sparxmaths.uk/student</a>
+                        </div>
                     </div>
-                </div>
-                <hr class="section-divider">
-                <div class="info-row">
-                    <span class="info-label">👨‍👩‍👧 Parent Access</span>
-                    <div class="info-value link-list">
-                        🌐 Parent Portal: Direct access link emailed in weekly homework updates.<br>
-                        📖 Parent Guide: <a href="https://sparxmaths.com/parents" target="_blank">sparxmaths.com/parents</a>
+                    <hr class="section-divider">
+                    <div class="info-row">
+                        <span class="info-label">👨‍👩‍👧 Parent Access</span>
+                        <div class="info-value link-list">
+                            🌐 Parent Portal: Direct access link emailed in weekly homework updates.<br>
+                            📖 Parent Guide: <a href="https://sparxmaths.com/parents" target="_blank">sparxmaths.com/parents</a>
+                        </div>
                     </div>
-                </div>
-                <hr class="section-divider">
-                <div class="info-row">
-                    <span class="info-label">📞 Main Point of Contact</span>
-                    <span class="info-value">
-                        Child's Year 7 Maths Teacher or Form Tutor
-                    </span>
-                </div>
-                <hr class="section-divider">
-                <div class="info-row">
-                    <span class="info-label">ℹ️ Other Info</span>
-                    <span class="info-value">
-                        Student accounts are created automatically by the school. Teachers select weekly topics covered in class, and Sparx generates personalized question sets with video support.
-                    </span>
+                    <hr class="section-divider">
+                    <div class="info-row">
+                        <span class="info-label">📞 Main Point of Contact</span>
+                        <span class="info-value">Child's Year 7 Maths Teacher or Form Tutor</span>
+                    </div>
+                    <hr class="section-divider">
+                    <div class="info-row">
+                        <span class="info-label">ℹ️ Other Info</span>
+                        <span class="info-value">
+                            Student accounts are created automatically by the school. Teachers select weekly topics covered in class, and Sparx generates personalized question sets with video support.
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- SOCS -->
         <div class="card" data-tags="socs sports cca activities fixtures teams timetable year 7 senior school">
-            <div>
-                <div class="card-header">
+            <div class="card-header" onclick="toggleCard(this)">
+                <div class="card-title-row">
                     <div class="card-title">SOCS</div>
+                    <svg class="chevron-icon" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
                 </div>
-                <div class="card-purpose">
-                    Management platform for Co-Curricular Activities (CCAs), preferential activity choices, sports fixtures, and team schedules for Senior School.
-                </div>
+                <div class="card-purpose">Management platform for Co-Curricular Activities (CCAs), preferential activity choices, sports fixtures, and team schedules for Senior School.</div>
             </div>
-            <div class="info-group">
-                <div class="info-row">
-                    <span class="info-label">🎓 Student Access</span>
-                    <div class="info-value link-list">
-                        🌐 Web Portal: <a href="https://www.socscms.com/login/student" target="_blank">socscms.com/login/student</a>
+            <div class="card-details">
+                <div class="info-group">
+                    <div class="info-row">
+                        <span class="info-label">🎓 Student Access</span>
+                        <div class="info-value link-list">
+                            🌐 Web Portal: <a href="https://www.socscms.com/login/student" target="_blank">socscms.com/login/student</a>
+                        </div>
                     </div>
-                </div>
-                <hr class="section-divider">
-                <div class="info-row">
-                    <span class="info-label">👨‍👩‍👧 Parent Access</span>
-                    <div class="info-value link-list">
-                        🌐 Web Portal: <a href="https://www.socscms.com/login/parent" target="_blank">socscms.com/login/parent</a><br>
-                        <em>(Search "Rugby School Dubai". Can be saved as a Web App to mobile home screens.)</em>
+                    <hr class="section-divider">
+                    <div class="info-row">
+                        <span class="info-label">👨‍👩‍👧 Parent Access</span>
+                        <div class="info-value link-list">
+                            🌐 Web Portal: <a href="https://www.socscms.com/login/parent" target="_blank">socscms.com/login/parent</a><br>
+                            <em>(Search "Rugby School Dubai". Can be saved as a Web App to mobile home screens.)</em>
+                        </div>
                     </div>
-                </div>
-                <hr class="section-divider">
-                <div class="info-row">
-                    <span class="info-label">📞 Main Point of Contact</span>
-                    <span class="info-value">
-                        Senior School (Y7–Y13): <a href="mailto:lreiners@rugbyschooldubai.ae">lreiners@rugbyschooldubai.ae</a>
-                    </span>
-                </div>
-                <hr class="section-divider">
-                <div class="info-row">
-                    <span class="info-label">ℹ️ Other Info</span>
-                    <span class="info-value">
-                        Parent accounts are activated using the registered iSAMS email address. Confirmed CCAs can be viewed under <em>Activities ➔ My Activities</em> or on the integrated calendar. Afternoon CCAs finish at 4:30 PM. For late registrations, contact Senior Reception.
-                    </span>
+                    <hr class="section-divider">
+                    <div class="info-row">
+                        <span class="info-label">📞 Main Point of Contact</span>
+                        <span class="info-value">
+                            Senior School (Y7–Y13): <a href="mailto:lreiners@rugbyschooldubai.ae">lreiners@rugbyschooldubai.ae</a>
+                        </span>
+                    </div>
+                    <hr class="section-divider">
+                    <div class="info-row">
+                        <span class="info-label">ℹ️ Other Info</span>
+                        <span class="info-value">
+                            Parent accounts are activated using the registered iSAMS email address. Confirmed CCAs can be viewed under <em>Activities ➔ My Activities</em> or on the integrated calendar. Afternoon CCAs finish at 4:30 PM. For late registrations, contact Senior Reception.
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Satchel One -->
         <div class="card" data-tags="satchel points merits house rewards conduct year 7 senior school">
-            <div>
-                <div class="card-header">
+            <div class="card-header" onclick="toggleCard(this)">
+                <div class="card-title-row">
                     <div class="card-title">Satchel One</div>
+                    <svg class="chevron-icon" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
                 </div>
-                <div class="card-purpose">
-                    Used for issuing and tracking House Points, merits, prep tasks, and student challenges across Senior School (Years 7–13).
-                </div>
+                <div class="card-purpose">Used for issuing and tracking House Points, merits, prep tasks, and student challenges across Senior School (Years 7–13).</div>
             </div>
-            <div class="info-group">
-                <div class="info-row">
-                    <span class="info-label">🎓 Student Access</span>
-                    <div class="info-value link-list">
-                        🌐 Web Login: <a href="https://www.satchelone.com/login" target="_blank">satchelone.com/login</a> (Select Student)<br>
-                        📱 Mobile App: <strong>Satchel One</strong> (<a href="https://apps.apple.com/app/satchel-one/id547840131" target="_blank">iOS</a> / <a href="https://play.google.com/store/apps/details?id=uk.co.smhw" target="_blank">Android</a>)
+            <div class="card-details">
+                <div class="info-group">
+                    <div class="info-row">
+                        <span class="info-label">🎓 Student Access</span>
+                        <div class="info-value link-list">
+                            🌐 Web Login: <a href="https://www.satchelone.com/login" target="_blank">satchelone.com/login</a> (Select Student)<br>
+                            📱 Mobile App: <strong>Satchel One</strong> (<a href="https://apps.apple.com/app/satchel-one/id547840131" target="_blank">iOS</a> / <a href="https://play.google.com/store/apps/details?id=uk.co.smhw" target="_blank">Android</a>)
+                        </div>
                     </div>
-                </div>
-                <hr class="section-divider">
-                <div class="info-row">
-                    <span class="info-label">👨‍👩‍👧 Parent Access</span>
-                    <div class="info-value link-list">
-                        🌐 Web Login: <a href="https://www.satchelone.com/login" target="_blank">satchelone.com/login</a><br>
-                        📱 Mobile App: <strong>Satchel One</strong> (<a href="https://apps.apple.com/app/satchel-one/id547840131" target="_blank">iOS</a> / <a href="https://play.google.com/store/apps/details?id=uk.co.smhw" target="_blank">Android</a>)
+                    <hr class="section-divider">
+                    <div class="info-row">
+                        <span class="info-label">👨‍👩‍👧 Parent Access</span>
+                        <div class="info-value link-list">
+                            🌐 Web Login: <a href="https://www.satchelone.com/login" target="_blank">satchelone.com/login</a><br>
+                            📱 Mobile App: <strong>Satchel One</strong> (<a href="https://apps.apple.com/app/satchel-one/id547840131" target="_blank">iOS</a> / <a href="https://play.google.com/store/apps/details?id=uk.co.smhw" target="_blank">Android</a>)
+                        </div>
                     </div>
-                </div>
-                <hr class="section-divider">
-                <div class="info-row">
-                    <span class="info-label">📞 Main Point of Contact</span>
-                    <span class="info-value">
-                        Senior School Leadership Team / Year 7 Form Tutor
-                    </span>
-                </div>
-                <hr class="section-divider">
-                <div class="info-row">
-                    <span class="info-label">ℹ️ Other Info</span>
-                    <span class="info-value">
-                        Parents link to their child's profile using a unique parent PIN provided by the school upon setup.
-                    </span>
+                    <hr class="section-divider">
+                    <div class="info-row">
+                        <span class="info-label">📞 Main Point of Contact</span>
+                        <span class="info-value">Senior School Leadership Team / Year 7 Form Tutor</span>
+                    </div>
+                    <hr class="section-divider">
+                    <div class="info-row">
+                        <span class="info-label">ℹ️ Other Info</span>
+                        <span class="info-value">
+                            Parents link to their child's profile using a unique parent PIN provided by the school upon setup.
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Spare App / Food Nation -->
         <div class="card" data-tags="spare canteen food foodnation meal lunch wallet balance card year 7 senior school">
-            <div>
-                <div class="card-header">
+            <div class="card-header" onclick="toggleCard(this)">
+                <div class="card-title-row">
                     <div class="card-title">Spare App / Food Nation</div>
+                    <svg class="chevron-icon" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
                 </div>
-                <div class="card-purpose">
-                    Cashless payment system for purchasing food items in the school canteen and Senior School dining facilities.
-                </div>
+                <div class="card-purpose">Cashless payment system for purchasing food items in the school canteen and Senior School dining facilities.</div>
             </div>
-            <div class="info-group">
-                <div class="info-row">
-                    <span class="info-label">🎓 Student Access</span>
-                    <div class="info-value link-list">
-                        💳 Physical Spare Card / Digital ID on-site.<br>
-                        <em>(Note: Phones and smartwatches are not permitted for payments on-site for Senior School students.)</em>
+            <div class="card-details">
+                <div class="info-group">
+                    <div class="info-row">
+                        <span class="info-label">🎓 Student Access</span>
+                        <div class="info-value link-list">
+                            💳 Physical Spare Card / Digital ID on-site.<br>
+                            <em>(Note: Phones and smartwatches are not permitted for payments on-site for Senior School students.)</em>
+                        </div>
                     </div>
-                </div>
-                <hr class="section-divider">
-                <div class="info-row">
-                    <span class="info-label">👨‍👩‍👧 Parent Access</span>
-                    <div class="info-value link-list">
-                        🌐 Official Site: <a href="https://www.paywithspare.com" target="_blank">paywithspare.com</a><br>
-                        📱 Mobile App: <strong>Spare</strong> (<a href="https://apps.apple.com/app/spare-cashless-campus/id1453258529" target="_blank">iOS</a> / <a href="https://play.google.com/store/apps/details?id=com.paywithspare.spare" target="_blank">Android</a>)
+                    <hr class="section-divider">
+                    <div class="info-row">
+                        <span class="info-label">👨‍👩‍👧 Parent Access</span>
+                        <div class="info-value link-list">
+                            🌐 Official Site: <a href="https://www.paywithspare.com" target="_blank">paywithspare.com</a><br>
+                            📱 Mobile App: <strong>Spare</strong> (<a href="https://apps.apple.com/app/spare-cashless-campus/id1453258529" target="_blank">iOS</a> / <a href="https://play.google.com/store/apps/details?id=com.paywithspare.spare" target="_blank">Android</a>)
+                        </div>
                     </div>
-                </div>
-                <hr class="section-divider">
-                <div class="info-row">
-                    <span class="info-label">📞 Main Point of Contact</span>
-                    <span class="info-value">
-                        Catering Feedback: <a href="mailto:info@foodnationme.com">info@foodnationme.com</a><br>
-                        Parent Relations Manager: <a href="mailto:prm@rugbyschooldubai.ae">prm@rugbyschooldubai.ae</a>
-                    </span>
-                </div>
-                <hr class="section-divider">
-                <div class="info-row">
-                    <span class="info-label">ℹ️ Other Info</span>
-                    <span class="info-value">
-                        Be sure to update your child's profile to <strong>Year 7</strong> in the Spare app settings so funds transfer correctly. The standard AED 26 hot meal package includes soup, salad, main course, and dessert.
-                    </span>
+                    <hr class="section-divider">
+                    <div class="info-row">
+                        <span class="info-label">📞 Main Point of Contact</span>
+                        <span class="info-value">
+                            Catering Feedback: <a href="mailto:info@foodnationme.com">info@foodnationme.com</a><br>
+                            Parent Relations Manager: <a href="mailto:prm@rugbyschooldubai.ae">prm@rugbyschooldubai.ae</a>
+                        </span>
+                    </div>
+                    <hr class="section-divider">
+                    <div class="info-row">
+                        <span class="info-label">ℹ️ Other Info</span>
+                        <span class="info-value">
+                            Be sure to update your child's profile to <strong>Year 7</strong> in the Spare app settings so funds transfer correctly. The standard AED 26 hot meal package includes soup, salad, main course, and dessert.
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Live Aldar App -->
         <div class="card" data-tags="aldar finance payments fees tuition direct debit invoice year 7">
-            <div>
-                <div class="card-header">
+            <div class="card-header" onclick="toggleCard(this)">
+                <div class="card-title-row">
                     <div class="card-title">Live Aldar App</div>
+                    <svg class="chevron-icon" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
                 </div>
-                <div class="card-purpose">
-                    Financial management portal for parents to view and pay school fee invoices, download receipts, and track payment transactions.
-                </div>
+                <div class="card-purpose">Financial management portal for parents to view and pay school fee invoices, download receipts, and track payment transactions.</div>
             </div>
-            <div class="info-group">
-                <div class="info-row">
-                    <span class="info-label">🎓 Student Access</span>
-                    <div class="info-value">
-                        <em>N/A — Financial management tool for parents.</em>
+            <div class="card-details">
+                <div class="info-group">
+                    <div class="info-row">
+                        <span class="info-label">🎓 Student Access</span>
+                        <div class="info-value"><em>N/A — Financial management tool for parents.</em></div>
                     </div>
-                </div>
-                <hr class="section-divider">
-                <div class="info-row">
-                    <span class="info-label">👨‍👩‍👧 Parent Access</span>
-                    <div class="info-value link-list">
-                        📱 Mobile App: <strong>Live Aldar</strong> (<a href="https://apps.apple.com/ae/app/live-aldar/id1552553068" target="_blank">iOS</a> / <a href="https://play.google.com/store/apps/details?id=com.aldar.livealdar" target="_blank">Android</a>)
+                    <hr class="section-divider">
+                    <div class="info-row">
+                        <span class="info-label">👨‍👩‍👧 Parent Access</span>
+                        <div class="info-value link-list">
+                            📱 Mobile App: <strong>Live Aldar</strong> (<a href="https://apps.apple.com/ae/app/live-aldar/id1552553068" target="_blank">iOS</a> / <a href="https://play.google.com/store/apps/details?id=com.aldar.livealdar" target="_blank">Android</a>)
+                        </div>
                     </div>
-                </div>
-                <hr class="section-divider">
-                <div class="info-row">
-                    <span class="info-label">📞 Main Point of Contact</span>
-                    <span class="info-value">
-                        Finance Team: <a href="mailto:finance@rugbyschooldubai.ae">finance@rugbyschooldubai.ae</a>
-                    </span>
-                </div>
-                <hr class="section-divider">
-                <div class="info-row">
-                    <span class="info-label">ℹ️ Other Info</span>
-                    <span class="info-value">
-                        Requires Parent Account Code & Student Account Code to register (found on term fee invoices). Bank transfers can also be made directly using invoice details.
-                    </span>
+                    <hr class="section-divider">
+                    <div class="info-row">
+                        <span class="info-label">📞 Main Point of Contact</span>
+                        <span class="info-value">
+                            Finance Team: <a href="mailto:finance@rugbyschooldubai.ae">finance@rugbyschooldubai.ae</a>
+                        </span>
+                    </div>
+                    <hr class="section-divider">
+                    <div class="info-row">
+                        <span class="info-label">ℹ️ Other Info</span>
+                        <span class="info-value">
+                            Requires Parent Account Code & Student Account Code to register (found on term fee invoices). Bank transfers can also be made directly using invoice details.
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Absence & Leave Requests -->
         <div class="card" data-tags="absence sick leave form permission doctor attendance year 7 senior school handbook">
-            <div>
-                <div class="card-header">
+            <div class="card-header" onclick="toggleCard(this)">
+                <div class="card-title-row">
                     <div class="card-title">Absence & Leave Form</div>
+                    <svg class="chevron-icon" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
                 </div>
-                <div class="card-purpose">
-                    Official Microsoft Form for parents to report student sickness, medical appointments, or planned school leave.
-                </div>
+                <div class="card-purpose">Official Microsoft Form for parents to report student sickness, medical appointments, or planned school leave.</div>
             </div>
-            <div class="info-group">
-                <div class="info-row">
-                    <span class="info-label">🎓 Student Access</span>
-                    <div class="info-value">
-                        <em>N/A — Absences must be submitted by a parent or guardian.</em>
+            <div class="card-details">
+                <div class="info-group">
+                    <div class="info-row">
+                        <span class="info-label">🎓 Student Access</span>
+                        <div class="info-value"><em>N/A — Absences must be submitted by a parent or guardian.</em></div>
                     </div>
-                </div>
-                <hr class="section-divider">
-                <div class="info-row">
-                    <span class="info-label">👨‍👩‍👧 Parent Access</span>
-                    <div class="info-value link-list">
-                        📋 Online Form: <a href="https://forms.cloud.microsoft/r/aBYgXfyj5p" target="_blank">Official RSD Absence Request Form</a><br>
-                        📖 Parent Handbook: <a href="https://heyzine.com/flip-book/rugbyschooldubai" target="_blank">Rugby School Dubai Parent Handbook</a>
+                    <hr class="section-divider">
+                    <div class="info-row">
+                        <span class="info-label">👨‍👩‍👧 Parent Access</span>
+                        <div class="info-value link-list">
+                            📋 Online Form: <a href="https://forms.cloud.microsoft/r/aBYgXfyj5p" target="_blank">Official RSD Absence Request Form</a><br>
+                            📖 Parent Handbook: <a href="https://heyzine.com/flip-book/rugbyschooldubai#page/18" target="_blank">Rugby School Dubai Parent Handbook</a>
+                        </div>
                     </div>
-                </div>
-                <hr class="section-divider">
-                <div class="info-row">
-                    <span class="info-label">📞 Main Point of Contact</span>
-                    <span class="info-value">
-                        Senior School Reception: <a href="mailto:reception@rugbyschooldubai.ae">reception@rugbyschooldubai.ae</a>
-                    </span>
-                </div>
-                <hr class="section-divider">
-                <div class="info-row">
-                    <span class="info-label">ℹ️ Other Info</span>
-                    <span class="info-value">
-                        Required for any unavoidable student absences or planned leave. Teachers and form tutors are also automatically notified once submitted.
-                    </span>
+                    <hr class="section-divider">
+                    <div class="info-row">
+                        <span class="info-label">📞 Main Point of Contact</span>
+                        <span class="info-value">
+                            Senior School Reception: <a href="mailto:reception@rugbyschooldubai.ae">reception@rugbyschooldubai.ae</a>
+                        </span>
+                    </div>
+                    <hr class="section-divider">
+                    <div class="info-row">
+                        <span class="info-label">ℹ️ Other Info</span>
+                        <span class="info-value">
+                            Required for any unavoidable student absences or planned leave. Teachers and form tutors are also automatically notified once submitted.
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Premier Music Academy (PMA) -->
         <div class="card" data-tags="music pma instruments lessons piano guitar violin singing extra paid year 7">
-            <div>
-                <div class="card-header">
+            <div class="card-header" onclick="toggleCard(this)">
+                <div class="card-title-row">
                     <div class="card-title">Premier Music Academy (PMA)</div>
+                    <svg class="chevron-icon" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
                 </div>
-                <div class="card-purpose">
-                    External provider hosting instrumental music lessons and vocal tuition on-site at Rugby School Dubai.
-                </div>
+                <div class="card-purpose">External provider hosting instrumental music lessons and vocal tuition on-site at Rugby School Dubai.</div>
             </div>
-            <div class="info-group">
-                <div class="info-row">
-                    <span class="info-label">🎓 Student Access</span>
-                    <div class="info-value">
-                        Attends individual or small-group instrumental lessons during scheduled slots on campus.
+            <div class="card-details">
+                <div class="info-group">
+                    <div class="info-row">
+                        <span class="info-label">🎓 Student Access</span>
+                        <div class="info-value">Attends individual or small-group instrumental lessons during scheduled slots on campus.</div>
                     </div>
-                </div>
-                <hr class="section-divider">
-                <div class="info-row">
-                    <span class="info-label">👨‍👩‍👧 Parent Access</span>
-                    <div class="info-value link-list">
-                        🎶 Booking Portal: <a href="https://pmaatrugbyschool.classcard.app/en/?course_filters=%5B%7B%22course_id%22%3A49162,%22durations%22%3A%5B175011%5D%7D%5D&isGuidedFilters=true&view=Schedule" target="_blank">PMA ClassCard Registration</a>
+                    <hr class="section-divider">
+                    <div class="info-row">
+                        <span class="info-label">👨‍👩‍👧 Parent Access</span>
+                        <div class="info-value link-list">
+                            🎶 Booking Portal: <a href="https://pmaatrugbyschool.classcard.app/en/?course_filters=%5B%7B%22course_id%22%3A49162,%22durations%22%3A%5B175011%5D%7D%5D&isGuidedFilters=true&view=Schedule" target="_blank">PMA ClassCard Registration</a>
+                        </div>
                     </div>
-                </div>
-                <hr class="section-divider">
-                <div class="info-row">
-                    <span class="info-label">📞 Main Point of Contact</span>
-                    <span class="info-value">
-                        Premier Music Academy Team / Music Department
-                    </span>
-                </div>
-                <hr class="section-divider">
-                <div class="info-row">
-                    <span class="info-label">ℹ️ Other Info</span>
-                    <span class="info-value">
-                        Instrumental tuition is an optional paid extra booked and scheduled directly through PMA on ClassCard, independent of the school's SOCS system.
-                    </span>
+                    <hr class="section-divider">
+                    <div class="info-row">
+                        <span class="info-label">📞 Main Point of Contact</span>
+                        <span class="info-value">Premier Music Academy Team / Music Department</span>
+                    </div>
+                    <hr class="section-divider">
+                    <div class="info-row">
+                        <span class="info-label">ℹ️ Other Info</span>
+                        <span class="info-value">
+                            Instrumental tuition is an optional paid extra booked and scheduled directly through PMA on ClassCard, independent of the school's SOCS system.
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Stu Williamson Photography (Stu Schools) -->
         <div class="card" data-tags="stu williamson schools photo photography portraits class sibling pictures order year 7">
-            <div>
-                <div class="card-header">
+            <div class="card-header" onclick="toggleCard(this)">
+                <div class="card-title-row">
                     <div class="card-title">Stu Williamson Photography</div>
+                    <svg class="chevron-icon" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
                 </div>
-                <div class="card-purpose">
-                    Official school photography provider for individual student portraits, class photographs, and sibling shoots.
-                </div>
+                <div class="card-purpose">Official school photography provider for individual student portraits, class photographs, and sibling shoots.</div>
             </div>
-            <div class="info-group">
-                <div class="info-row">
-                    <span class="info-label">🎓 Student Access</span>
-                    <div class="info-value">
-                        Photos are taken on designated photography days at school in full uniform.
+            <div class="card-details">
+                <div class="info-group">
+                    <div class="info-row">
+                        <span class="info-label">🎓 Student Access</span>
+                        <div class="info-value">Photos are taken on designated photography days at school in full uniform.</div>
                     </div>
-                </div>
-                <hr class="section-divider">
-                <div class="info-row">
-                    <span class="info-label">👨‍👩‍👧 Parent Access</span>
-                    <div class="info-value link-list">
-                        🌐 Web Ordering Portal: <a href="https://www.stu.ae" target="_blank">stu.ae</a>
+                    <hr class="section-divider">
+                    <div class="info-row">
+                        <span class="info-label">👨‍👩‍👧 Parent Access</span>
+                        <div class="info-value link-list">
+                            🌐 Web Ordering Portal: <a href="https://www.stu.ae" target="_blank">stu.ae</a>
+                        </div>
                     </div>
-                </div>
-                <hr class="section-divider">
-                <div class="info-row">
-                    <span class="info-label">📞 Main Point of Contact</span>
-                    <span class="info-value">
-                        Stu Williamson Photography Support / School Admissions
-                    </span>
-                </div>
-                <hr class="section-divider">
-                <div class="info-row">
-                    <span class="info-label">ℹ️ Other Info</span>
-                    <span class="info-value">
-                        Access codes or physical proof cards are distributed via email or sent home with students after photo shoots to view and order digital images, prints, or class blends.
-                    </span>
+                    <hr class="section-divider">
+                    <div class="info-row">
+                        <span class="info-label">📞 Main Point of Contact</span>
+                        <span class="info-value">Stu Williamson Photography Support / School Admissions</span>
+                    </div>
+                    <hr class="section-divider">
+                    <div class="info-row">
+                        <span class="info-label">ℹ️ Other Info</span>
+                        <span class="info-value">
+                            Access codes or physical proof cards are distributed via email or sent home with students after photo shoots to view and order digital images, prints, or class blends.
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -659,6 +711,13 @@
                 card.style.display = 'none';
             }
         });
+    }
+
+    function toggleCard(header) {
+        if (window.innerWidth <= 768) {
+            const card = header.parentElement;
+            card.classList.toggle('open');
+        }
     }
 </script>
 
