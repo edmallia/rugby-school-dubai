@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rugby School Dubai — Year 7 Parent & Student App Directory</title>
+    
+    <!-- Mobile Web App Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="RSD Directory">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#002b49">
+
     <style>
         :root {
             --primary: #002b49;
@@ -54,6 +62,15 @@
             font-size: 0.95rem;
         }
 
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
         .header-tag {
             display: inline-block;
             background: rgba(255, 255, 255, 0.15);
@@ -62,8 +79,26 @@
             border-radius: 6px;
             font-size: 0.85rem;
             font-weight: 600;
-            margin-bottom: 10px;
             letter-spacing: 0.5px;
+        }
+
+        .install-btn {
+            background-color: var(--accent);
+            color: #000000;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: opacity 0.2s;
+        }
+
+        .install-btn:hover {
+            opacity: 0.9;
         }
 
         .notice-banner {
@@ -136,9 +171,10 @@
             padding: 20px;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: flex-start; /* Keeps content top-aligned */
             box-shadow: 0 1px 3px rgba(0,0,0,0.05);
             transition: transform 0.2s, box-shadow 0.2s;
+            height: 100%;
         }
 
         .card:hover {
@@ -147,7 +183,7 @@
         }
 
         .card-header {
-            margin-bottom: 12px;
+            margin-bottom: 0;
         }
 
         .card-title-row {
@@ -176,11 +212,18 @@
             margin-top: 6px;
         }
 
+        .card-details {
+            flex-grow: 1; /* Pushes any remaining whitespace to the bottom */
+            display: flex;
+            flex-direction: column;
+        }
+
         .info-group {
             border-top: 1px solid var(--border);
             padding-top: 12px;
             margin-top: 12px;
             font-size: 0.875rem;
+            flex-grow: 1;
         }
 
         .info-row {
@@ -233,6 +276,67 @@
             text-decoration: underline;
         }
 
+        /* Modal Popup Styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-card {
+            background: #ffffff;
+            border-radius: 12px;
+            max-width: 450px;
+            width: 100%;
+            padding: 24px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .modal-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .modal-steps {
+            font-size: 0.9rem;
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        .modal-steps ol {
+            margin-left: 20px;
+            margin-top: 8px;
+            margin-bottom: 16px;
+        }
+
+        .modal-steps li {
+            margin-bottom: 8px;
+        }
+
+        .modal-close-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
         /* Mobile Collapsible Styles */
         @media (max-width: 768px) {
             body {
@@ -246,6 +350,7 @@
 
             .card {
                 padding: 16px;
+                height: auto;
             }
 
             .card-header {
@@ -291,7 +396,12 @@
 
 <div class="container">
     <header>
-        <div class="header-tag">YEAR 7 / SENIOR SCHOOL</div>
+        <div class="header-top">
+            <div class="header-tag">YEAR 7 / SENIOR SCHOOL</div>
+            <button class="install-btn" onclick="showInstallModal()">
+                📱 Add to Home Screen
+            </button>
+        </div>
         <h1>Rugby School Dubai — App Directory & Links</h1>
         <p>A central guide for parents and students to track all required platforms, web portals, mobile apps, and access methods for 2026/27.</p>
     </header>
@@ -697,6 +807,17 @@
     </footer>
 </div>
 
+<!-- Home Screen Instructions Modal -->
+<div class="modal-overlay" id="installModal" onclick="closeModalOnOverlay(event)">
+    <div class="modal-card">
+        <div class="modal-title">Add to Home Screen</div>
+        <div class="modal-steps" id="modalContent">
+            <!-- Dynamic instructions generated by JavaScript -->
+        </div>
+        <button class="modal-close-btn" onclick="hideInstallModal()">Got it</button>
+    </div>
+</div>
+
 <script>
     function filterCards() {
         const query = document.getElementById('searchInput').value.toLowerCase();
@@ -717,6 +838,44 @@
         if (window.innerWidth <= 768) {
             const card = header.parentElement;
             card.classList.toggle('open');
+        }
+    }
+
+    /* Modal Instructions Logic */
+    function showInstallModal() {
+        const isiOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        const modalContent = document.getElementById('modalContent');
+
+        if (isiOS) {
+            modalContent.innerHTML = `
+                <p>Install this app directory on your iPhone / iPad home screen:</p>
+                <ol>
+                    <li>Tap the <strong>Share</strong> button in Safari (the square icon with an arrow pointing up at the bottom or top of your screen).</li>
+                    <li>Scroll down and tap <strong>Add to Home Screen</strong>.</li>
+                    <li>Tap <strong>Add</strong> in the top right corner.</li>
+                </ol>
+            `;
+        } else {
+            modalContent.innerHTML = `
+                <p>Install this app directory on your Android / Chrome device:</p>
+                <ol>
+                    <li>Tap the <strong>Menu</strong> icon (the 3 vertical dots in the top right corner of Chrome).</li>
+                    <li>Tap <strong>Add to Home screen</strong> (or <em>Install app</em>).</li>
+                    <li>Follow the prompt to add the shortcut to your device.</li>
+                </ol>
+            `;
+        }
+
+        document.getElementById('installModal').style.display = 'flex';
+    }
+
+    function hideInstallModal() {
+        document.getElementById('installModal').style.display = 'none';
+    }
+
+    function closeModalOnOverlay(e) {
+        if (e.target.classList.contains('modal-overlay')) {
+            hideInstallModal();
         }
     }
 </script>
